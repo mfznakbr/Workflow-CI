@@ -37,7 +37,7 @@ if __name__ == "__main__":
     else:
         mlflow.set_tracking_uri("file://"+ os.path.abspath("mlruns"))
     
-    with mlflow.start_run():
+    with mlflow.start_run() as run:
         param = {'n_neighbors': np.arange(3,4,5)}
         kf = KFold(n_splits=3, shuffle=True)
 
@@ -65,8 +65,13 @@ if __name__ == "__main__":
                     mlflow.log_metric(f"{label}_{m_name}", m_val)
         
         # log model
-        print("run_id=", mlflow.active_run().info.run_id)
         mlflow.sklearn.log_model(best_model, artifact_path="model", input_example=X_train.iloc[:1])
+        run_id = run.info.run_id
+        print(f"Run ID: {run_id}")
+    
+        # >>>>> SIMPAN RUN_ID KE FILE
+        with open("run_id.txt", "w") as f:
+            f.write(run_id)
 
 
         print("Best params :", grid_search.best_params_)
