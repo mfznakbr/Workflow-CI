@@ -15,7 +15,7 @@ if __name__ == "__main__":
     np.random.seed(42)
 
     # ambil argumen CLI 
-    file_path = sys.argv[3] if len(sys.argv) > 3 else os.path.join(os.path.dirname(os.path.abspath(__file__), "personality_preprocessing_datasert.csv"))
+    file_path = sys.argv[3] if len(sys.argv) > 3 else os.path.join(os.path.dirname(os.path.abspath(__file__)), "personality_preprocessing_datasert.csv")
     test_path = file_path.replace("personality_preprocessing_datasert.csv", "data_test_personality.csv")
 
     print(f"Reading data train from : {file_path}")
