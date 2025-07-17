@@ -1,0 +1,9 @@
+name: personality_knn
+
+conda_env: conda.yaml
+
+entry_points:
+  main:
+    parameters:
+      dataset: {type: str, default: "personality_preprocessing_datasert.csv"}
+    command: "python modelling.py --dataset {dataset}"
