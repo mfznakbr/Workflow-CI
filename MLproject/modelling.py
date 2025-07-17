@@ -63,9 +63,11 @@ if __name__ == "__main__":
             if isinstance(metrics, dict):
                 for m_name, m_val in metrics.items():
                     mlflow.log_metric(f"{label}_{m_name}", m_val)
+        
+        # log model
+        print("run_id=", mlflow.active_run().info.run_id)
+        mlflow.sklearn.log_model(model, artifact_path="model", input_example=X_train.iloc[:1])
 
-        # Log model
-        mlflow.sklearn.log_model(best_model, artifact_path="model_knn")
 
         print("Best params :", grid_search.best_params_)
         print("Best cv Score :", grid_search.best_score_)

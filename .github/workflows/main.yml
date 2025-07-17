@@ -47,9 +47,10 @@ jobs:
 
       - name: Get Latest MLflow run_id
         run: |
-          RUN_ID=$(find mlruns/0 -maxdepth 1 -mindepth 1 -type d -exec basename {} \; | grep -E '^[a-f0-9]{32}$' | head -n 1)
+          RUN_ID=$(grep "run_id=" mlruns/*/*/stdout | tail -n1 | cut -d'=' -f2)
           echo "RUN_ID=$RUN_ID" >> $GITHUB_ENV
           echo "Latest run_id: $RUN_ID"
+
 
       - name: Build Docker Model Image
         run: |
