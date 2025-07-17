@@ -66,7 +66,7 @@ if __name__ == "__main__":
         
         # log model
         print("run_id=", mlflow.active_run().info.run_id)
-        mlflow.sklearn.log_model(model, artifact_path="model", input_example=X_train.iloc[:1])
+        mlflow.sklearn.log_model(best_model, artifact_path="model", input_example=X_train.iloc[:1])
 
 
         print("Best params :", grid_search.best_params_)

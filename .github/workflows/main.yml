@@ -45,11 +45,12 @@ jobs:
         run: |
           mlflow run MLproject/ --env-manager=local
 
-      - name: Get Latest MLflow run_id
+      - name: Get latest MLflow run_id
         run: |
-          RUN_ID=$(mlflow runs list -n 1 --order-by start_time desc | awk 'NR==2 {print $1}')
+          RUN_ID=$(find mlruns/0 -maxdepth 1 -mindepth 1 -type d -exec basename {} \; | grep -E '^[a-f0-9]{32}$' | head -n 1)
           echo "RUN_ID=$RUN_ID" >> $GITHUB_ENV
           echo "Latest run_id: $RUN_ID"
+
 
       - name: Build Docker Model Image
         run: |
