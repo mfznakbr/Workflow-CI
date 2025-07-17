@@ -11,12 +11,6 @@ import argparse
 import warnings
 
 if __name__ == "__main__":
-    
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--dataset", type=str, default="personality_preprocessing_datasert.csv")
-    args = parser.parse_args()
-
-    file_path = args.dataset
     warnings.filterwarnings("ignore")
     np.random.seed(42)
 
