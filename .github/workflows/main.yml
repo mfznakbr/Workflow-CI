@@ -47,10 +47,9 @@ jobs:
 
       - name: Get Latest MLflow run_id
         run: |
-          RUN_ID=$(grep "run_id=" mlruns/*/*/stdout | tail -n1 | cut -d'=' -f2)
+          RUN_ID=$(mlflow runs list -n 1 --order-by start_time desc | awk 'NR==2 {print $1}')
           echo "RUN_ID=$RUN_ID" >> $GITHUB_ENV
           echo "Latest run_id: $RUN_ID"
-
 
       - name: Build Docker Model Image
         run: |
